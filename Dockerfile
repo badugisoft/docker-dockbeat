@@ -1,6 +1,7 @@
-FROM golang:1.7
+FROM golang:1.7-alpine
 
-RUN cd /tmp &&\
+RUN apk add --update --no-cache bash python git make g++ &&\
+    cd /tmp &&\
     wget http://pyyaml.org/download/pyyaml/PyYAML-3.11.tar.gz &&\
     tar -zxvf PyYAML-3.11.tar.gz &&\
     cd /tmp/PyYAML-3.11 &&\
@@ -13,7 +14,8 @@ RUN cd /tmp &&\
     mkdir -p /etc/dockbeat/ &&\
     cp $GOPATH/src/github.com/ingensi/dockbeat/dockbeat /usr/local/bin/dockbeat &&\
     rm -rf $GOPATH &&\
-    rm -rf /tmp/PyYAML-3.11
+    rm -rf /tmp/PyYAML-3.11 &&\
+    apk del python git make g++
 
 COPY ./dockbeat.yml /etc/dockbeat/dockbeat.yml
 
