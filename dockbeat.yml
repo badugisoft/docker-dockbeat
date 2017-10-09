@@ -1,0 +1,12 @@
+dockbeat:
+  period: ${PERIOD:5}
+  stats:
+    container: ${STATS_CONTAINER:true}
+    net: ${STATS_NET:true}
+    memory: ${STATS_MEMORY:true}
+    blkio: ${STATS_BLKIO:true}
+    cpu: ${STATS_CPU:true}
+
+output:
+  elasticsearch:
+    hosts: ["${ELASTICSEARCH_HOST:elasticsearch:9200}"]
